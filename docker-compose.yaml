@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  jupyter:
+    build: .
+    container_name: gallery-art
+    user: "${NB_UID}:${NB_GID}"
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/usr/src/app
+    command: /bin/bash -c "chmod -R u+w /usr/src/app && start-notebook.sh"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: "${TOKEN}"
